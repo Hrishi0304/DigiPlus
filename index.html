@@ -24,7 +24,51 @@
     th {
       background-color: #f2f2f2;
     }
+
+    .add-row-button {
+      margin-top: 20px;
+      float: right;
+    }
   </style>
+  <script>
+    var currentRowNum = 1; 
+
+    function addRow() {
+      var table = document.getElementById("dynamic-table");
+      var newRow = table.insertRow(table.rows.length);
+
+      var cell1 = newRow.insertCell(0);
+      var cell2 = newRow.insertCell(1);
+      var cell3 = newRow.insertCell(2);
+      var cell4 = newRow.insertCell(3);
+      var cell5 = newRow.insertCell(4);
+
+      var rowNumInput = document.createElement("input");
+      rowNumInput.type = "text";
+      rowNumInput.value = currentRowNum++; 
+      rowNumInput.disabled = true;
+      cell1.appendChild(rowNumInput);
+
+      var name = document.createElement("input");
+      name.type = "text";
+      cell2.appendChild(name);
+
+      var location = document.createElement("input");
+      location.type = "text";
+      cell3.appendChild(location);
+
+      var cgpa = document.createElement("input");
+      cgpa.type = "text";
+      cell4.appendChild(cgpa);
+
+      var deleteButton = document.createElement("button");
+      deleteButton.innerHTML = "Delete";
+      deleteButton.onclick = function() {
+        table.deleteRow(newRow.rowIndex);
+      };
+      cell5.appendChild(deleteButton);
+    }
+  </script>
 </head>
 
 <body>
@@ -38,42 +82,7 @@
       <th>Action</th>
     </tr>
   </table>
-  <button onclick="addRow()">Add Row</button>
-  <script>
-    function addRow() {
-      var table = document.getElementById("dynamic-table");
-      var newRow = table.insertRow(table.rows.length);
-
-      var cell1 = newRow.insertCell(0);
-      var cell2 = newRow.insertCell(1);
-      var cell3 = newRow.insertCell(2);
-      var cell4 = newRow.insertCell(3);
-      var cell5 = newRow.insertCell(4);
-
-      var RowInput = document.createElement("input");
-      RowInput.type = "text";
-      cell1.appendChild(RowInput);
-
-      var nameInput = document.createElement("input");
-      nameInput.type = "text";
-      cell2.appendChild(nameInput);
-
-      var LocInput = document.createElement("input");
-      LocInput.type = "text";
-      cell3.appendChild(LocInput);
-
-      var CGPAInput = document.createElement("input");
-      CGPAInput.type = "text";
-      cell4.appendChild(CGPAInput);
-
-      var ActionButton = document.createElement("button");
-      ActionButton.innerHTML = "Delete";
-      ActionButton.onclick = function () {
-        table.deleteRow(newRow.rowIndex);
-      };
-      cell5.appendChild(ActionButton);
-    }
-  </script>
+  <button class="add-row-button" onclick="addRow()">Add Row</button>
 </body>
 
 </html>
